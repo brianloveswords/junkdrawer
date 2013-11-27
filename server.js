@@ -12,11 +12,11 @@ const junkDrawer = new JunkDrawer({
   root: drawerRoot
 })
 
-
 const methodEndpoints = {
   'GET': function (req, res) {
+
     if (isIndex(req))
-      console.log('yeah its the fucking index')
+      return showIndex(res)
 
     const file = getFilePath(req)
 
@@ -25,7 +25,6 @@ const methodEndpoints = {
         console.dir(error)
         return fileNotFound(res)
       }).pipe(res)
-
   },
 
   'DELETE': function (req, res) {
@@ -78,6 +77,19 @@ http.createServer(function (req, res) {
 function isIndex(req) {
   const parts = url.parse(req.url)
   return parts.pathname.trim() === '/'
+}
+
+function showIndex(res) {
+  junkDrawer.getFileList(function (error, files) {
+    if (error) {
+      console.dir(error)
+      return fileNotFound(res)
+    }
+
+    res.writeHead(200, {'content-type': 'application/json'})
+    res.write(JSON.stringify(files))
+    res.end()
+  })
 }
 
 function getFilePath(req) {

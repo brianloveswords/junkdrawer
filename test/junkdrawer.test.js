@@ -91,6 +91,14 @@ test('junkdrawer move', function (t) {
     })
 })
 
+test('junkdrawer file list', function (t) {
+  junk.getFileList(function (err, files) {
+    t.ok(files.length > 0, 'should have files')
+    t.end()
+  })
+})
+
+
 function cp(from, to) {
   const data = fs.readFileSync(path.join(junkDir, from))
   fs.writeFileSync(path.join(junkDir, to), data)

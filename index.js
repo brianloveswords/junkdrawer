@@ -62,6 +62,18 @@ JunkDrawer.prototype = xtend(EventEmitter.prototype, {
   createReadStream: function (file) {
     return this.createStream('Read', file)
   },
+  getFileList: function (callback) {
+    fs.readdir(this.root, function (error, files) {
+      if (error)
+        return callback(error)
+
+      files = files.filter(function (file) {
+        return file[0] !== '.'
+      })
+
+      return callback(null, files)
+    })
+  },
   copyFile: function (from, to, callback) {
     const event = this.doneEmitter(callback)
     const safefrom = this.safefile(from)
