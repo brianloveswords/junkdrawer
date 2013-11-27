@@ -15,7 +15,18 @@ function JunkDrawer(opts) {
     return new JunkDrawer(opts)
 
   defer(this, 'emit')
-  this.root = opts.root || '.'
+
+  if (!opts.root)
+    throw new Error('You must set a root for the JunkDrawer')
+
+  if (!isFolder(opts.root))
+    throw new Error('root must be a directory')
+
+  this.root = opts.root
+}
+
+function isFolder(dir) {
+  return fs.statSync(dir).isDirectory()
 }
 
 JunkDrawer.prototype = xtend(EventEmitter.prototype, {
