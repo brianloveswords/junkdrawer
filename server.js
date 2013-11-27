@@ -9,7 +9,7 @@ const JunkDrawer = require('./')
 const Handlebars = require('handlebars')
 const Ecstatic = require('ecstatic')
 
-const drawerPath = process.env.JUNK_PATH
+const drawerPath = process.env.JUNKPATH
 const drawerRoot = path.resolve(__dirname, drawerPath)
 
 const staticDir = path.join(__dirname, 'static')
