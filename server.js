@@ -8,13 +8,10 @@ const JunkDrawer = require('./')
 const drawerPath = process.env.DRAWER_PATH
 const drawerRoot = path.resolve(__dirname, drawerPath)
 
-const junkDrawer = new JunkDrawer({
-  root: drawerRoot
-})
+const junkDrawer = new JunkDrawer({ root: drawerRoot })
 
 const methodEndpoints = {
   'GET': function (req, res) {
-
     if (isIndex(req))
       return showIndex(res)
 

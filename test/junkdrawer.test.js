@@ -92,7 +92,9 @@ test('junkdrawer move', function (t) {
 })
 
 test('junkdrawer file list', function (t) {
-  junk.getFileList(function (err, files) {
+  junk.getFileList(function (error, files) {
+    console.dir(error)
+    console.dir(files)
     t.ok(files.length > 0, 'should have files')
     t.end()
   })

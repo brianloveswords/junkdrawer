@@ -5,6 +5,7 @@ const safepath = require('./lib/safepath')
 const util = require('util')
 const xtend = require('xtend')
 const through = require('through')
+const async = require('async')
 
 module.exports = JunkDrawer
 
@@ -63,15 +64,33 @@ JunkDrawer.prototype = xtend(EventEmitter.prototype, {
     return this.createStream('Read', file)
   },
   getFileList: function (callback) {
-    fs.readdir(this.root, function (error, files) {
+    const self = this
+
+    fs.readdir(self.root, function (error, files) {
       if (error)
         return callback(error)
 
-      files = files.filter(function (file) {
-        return file[0] !== '.'
-      })
+      function filterHidden(files) {
+        return files.filter(function (file) {
+          return file[0] !== '.'
+        })
+      }
 
-      return callback(null, files)
+      function getStats(file, callback) {
+        const fullPath = self.safefile(file)
+        fs.stat(fullPath, function (error, stats) {
+          if (error)
+            return callback(error)
+
+          return callback(null, {
+            file: file,
+            stats: stats
+          })
+        })
+      }
+
+      async.map(filterHidden(files), getStats, callback)
+
     })
   },
   copyFile: function (from, to, callback) {
