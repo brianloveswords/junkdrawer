@@ -24,9 +24,10 @@ document.body.addEventListener('keydown', function (event) {
     if (focused == visible.length)
       focused = visible.length - 1
     visible[focused].querySelector('a').focus()
+    return false
   }
 
-  if (event.keyCode == up) {
+  else if (event.keyCode == up) {
     if (focused == -1)
       return
 
@@ -39,8 +40,14 @@ document.body.addEventListener('keydown', function (event) {
       return
     }
     visible[focused].querySelector('a').focus()
+    return false
   }
-})
+
+  else {
+    filter.focus()
+    return true
+  }
+}, true)
 
 
 function search() {
