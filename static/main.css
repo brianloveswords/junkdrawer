@@ -68,6 +68,7 @@ li {
   height: 1.3em;
 }
 .hidden {
+  pointer-events: none;
   opacity: 0;
   height: 0;
 }
