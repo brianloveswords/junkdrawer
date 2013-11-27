@@ -61,12 +61,14 @@ const methodEndpoints = {
   'POST': function (req, res) {
     const file = getFilePath(req)
 
-    req.on('error', function () {
+    req.on('error', function (error) {
+      console.dir(error)
       return forbidden(res)
     })
 
     req.pipe(junkDrawer.createWriteStream(file))
       .on('error', function (error) {
+        console.dir(error)
         return forbidden(res)
       })
       .on('finish', function () {
