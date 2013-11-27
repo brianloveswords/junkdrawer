@@ -90,7 +90,7 @@ http.createServer(function (req, res) {
 
   return methodEndpoints[method](req, res)
 
-}).listen('/tmp/junk.sock')
+}).listen(process.env.SOCKET || '/tmp/junk.sock')
 
 function isIndex(req) {
   const parts = url.parse(req.url)
