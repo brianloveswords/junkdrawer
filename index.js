@@ -29,13 +29,13 @@ JunkDrawer.prototype = xtend(EventEmitter.prototype, {
     return ee
   },
 
-  safe: function (file) {
+  safefile: function (file) {
     return safepath(this.root, file)
   },
 
   createStream: function(type, file) {
     const stream = through()
-    const safename = this.safe(file)
+    const safename = this.safefile(file)
     defer(stream, 'emit')
 
     if (!safename)
@@ -53,9 +53,9 @@ JunkDrawer.prototype = xtend(EventEmitter.prototype, {
   },
   copyFile: function (from, to, callback) {
     const event = this.doneEmitter(callback)
+    const safefrom = this.safefile(from)
+    const safeto = this.safefile(to)
 
-    const safefrom = this.safe(from)
-    const safeto = this.safe(to)
     if (!safefrom) return this.unsafeAccessError('Copy', from, event)
     if (!safeto) return this.unsafeAccessError('Copy', to, event)
 
@@ -69,7 +69,7 @@ JunkDrawer.prototype = xtend(EventEmitter.prototype, {
   },
   deleteFile: function (file, callback) {
     const event = this.doneEmitter(callback)
-    const safename = this.safe(file)
+    const safename = this.safefile(file)
 
     if (!safename)
       return this.unsafeAccessError('Delete', file, event)
@@ -85,8 +85,8 @@ JunkDrawer.prototype = xtend(EventEmitter.prototype, {
   moveFile: function (from, to, callback) {
     const self = this
     const event = self.doneEmitter(callback)
-    const safefrom = self.safe(from)
-    const safeto = self.safe(to)
+    const safefrom = self.safefile(from)
+    const safeto = self.safefile(to)
 
     if (!safefrom) return self.unsafeAccessError('Move', from, event)
     if (!safeto) return self.unsafeAccessError('Move', to, event)
@@ -108,7 +108,6 @@ JunkDrawer.prototype = xtend(EventEmitter.prototype, {
     emitter.emit('error', error)
     return emitter
   }
-
 })
 
 function defer(obj, method) {
