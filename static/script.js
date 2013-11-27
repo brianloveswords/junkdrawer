@@ -1,8 +1,37 @@
+const list = document.querySelector('ul')
 const entries = [].slice.call(document.querySelectorAll('li'))
 const filter = document.getElementById('filter')
 
 var oldTerm
 filter.addEventListener('keyup', search)
+
+var focused = -1
+
+document.body.addEventListener('keydown', function (event) {
+  const up = 38
+  const down = 40
+  if (event.keyCode == down) {
+    focused ++
+    if (focused == entries.length)
+      focused = entries.length - 1
+    entries[focused].querySelector('a').focus()
+  }
+
+  if (event.keyCode == up) {
+    if (focused == -1)
+      return
+
+    focused --
+
+    if (focused < 0) {
+      list.querySelector('a:focus').blur()
+      focused = -1
+      return
+    }
+    entries[focused].querySelector('a').focus()
+  }
+})
+
 
 function search() {
   const term = filter.value.trim()
