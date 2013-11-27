@@ -5,13 +5,18 @@ const filter = document.getElementById('filter')
 var oldTerm
 filter.addEventListener('keyup', search)
 
-var focused = -1
+var focused = -2
 
 document.body.addEventListener('keydown', function (event) {
   const up = 38
   const down = 40
+
   if (event.keyCode == down) {
     focused ++
+
+    if (focused == -1)
+      return filter.focus()
+
     if (focused == entries.length)
       focused = entries.length - 1
     entries[focused].querySelector('a').focus()
@@ -25,6 +30,7 @@ document.body.addEventListener('keydown', function (event) {
 
     if (focused < 0) {
       list.querySelector('a:focus').blur()
+      filter.focus()
       focused = -1
       return
     }
