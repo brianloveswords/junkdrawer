@@ -12,14 +12,15 @@
     "through": "~2.3.4",
     "xtend": "~2.1.1",
     "ecstatic": "~0.4.12",
-    "humanize": "0.0.9"
+    "humanize": "0.0.9",
+    "supervisor": "~0.5.6"
   },
   "devDependencies": {
     "tap": "~0.4.6"
   },
   "scripts": {
     "test": "tap test/*.js",
-    "start": "node server.js"
+    "start": "supervisor server.js"
   },
   "repository": {
     "type": "git",
