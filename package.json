@@ -13,7 +13,8 @@
     "xtend": "~2.1.1",
     "ecstatic": "~0.4.12",
     "humanize": "0.0.9",
-    "supervisor": "~0.5.6"
+    "supervisor": "~0.5.6",
+    "async": "~0.2.9"
   },
   "devDependencies": {
     "tap": "~0.4.6"
@@ -21,7 +22,7 @@
   "scripts": {
     "test": "tap test/*.js",
     "start": "supervisor server.js"
-  },
+    },
   "repository": {
     "type": "git",
     "url": "git://github.com/brianloveswords/junkdrawer.git"
