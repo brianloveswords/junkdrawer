@@ -7,7 +7,9 @@ filter.addEventListener('keyup', search)
 
 var focused = -2
 
-document.body.addEventListener('keydown', function (event) {
+document.body.addEventListener('keydown', keystrokes, true)
+
+function keystrokes(event) {
   const up = 38
   const down = 40
 
@@ -47,10 +49,17 @@ document.body.addEventListener('keydown', function (event) {
     filter.focus()
     return true
   }
-}, true)
+}
 
 
-function search() {
+function search(event) {
+  const up = 38
+  const down = 40
+
+  if (event.keyCode == down || event.keyCode == up)
+    return keystrokes(event)
+
+
   const term = filter.value.trim()
 
   if (term == oldTerm) return
