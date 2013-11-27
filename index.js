@@ -89,8 +89,9 @@ JunkDrawer.prototype = xtend(EventEmitter.prototype, {
         })
       }
 
-      async.map(filterHidden(files), getStats, callback)
+      const visibleFiles = filterHidden(files)
 
+      async.map(visibleFiles, getStats, callback)
     })
   },
   copyFile: function (from, to, callback) {

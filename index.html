@@ -1,0 +1,24 @@
+<!doctype html "junkdrawer">
+<html>
+  <head>
+    <title>just some junk</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/fira.css">
+  </head>
+  <body>
+    <h1>Whatever</h1>
+    <div class="search">
+      <input type="search" placeholder="filter">
+    </div>
+
+    <ul>
+      {{#files}}
+      <li data-file="{{file}}">
+        <a href="{{file}}">{{file}}</a>
+        <span class="size">{{human stats.size}}</span>
+      </li>
+      {{/files}}
+    </ul>
+    <script src="/static/script.js"></script>
+  </body>
+</html>

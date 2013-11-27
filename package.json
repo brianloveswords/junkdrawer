@@ -10,7 +10,8 @@
     "cleansocket": "~0.1.1",
     "concat-stream": "~1.2.0",
     "through": "~2.3.4",
-    "xtend": "~2.1.1"
+    "xtend": "~2.1.1",
+    "ecstatic": "~0.4.12"
   },
   "devDependencies": {
     "tap": "~0.4.6"

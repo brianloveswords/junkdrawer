@@ -1,0 +1,64 @@
+body {
+  width: 32em;
+  font-family: 'Fira Sans';
+  font-size: 26px;
+  line-height: 1.3em;
+  padding: 1em 0 0 0;
+  margin: auto;
+}
+h1 {
+  float: left;
+  color: #222;
+}
+a {
+  color: #5af;
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: 1px dotted #464;
+}
+a:focus {
+  transition: all 0.5s;
+  color: #37a;
+}
+ul {
+  list-style: none;
+  margin: 1em 0 0;
+  padding: 0;
+}
+li {
+  margin: 0;
+}
+.search {
+  text-align: right;
+}
+.search input {
+  transition: all 0.5s;
+  opacity: 0.2;
+  border: 1px solid #ddd;
+  padding: 0.25em 0.6em;
+  font-size: 1em;
+  border-radius: 0.25em;
+  color: #555;
+}
+.search input:hover {
+  opacity: 0.4;
+}
+.search input:focus, input:hover {
+  opacity: 1;
+}
+.size {
+  display: inline-block;
+  font-size: 75%;
+  margin-left: 1em;
+  color: #bbb;
+}
+.size:before, .size:after {
+  color: #999
+}
+.size:before {
+  content: '{'
+}
+.size:after {
+  content: '}'
+}

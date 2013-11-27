@@ -1,19 +1,38 @@
 require('cleansocket/listen')
 
 const http = require('http')
+const fs = require('fs')
 const path = require('path')
 const url = require('url')
+const humanize = require('humanize')
 const JunkDrawer = require('./')
+const Handlebars = require('handlebars')
+const Ecstatic = require('ecstatic')
 
 const drawerPath = process.env.DRAWER_PATH
 const drawerRoot = path.resolve(__dirname, drawerPath)
 
-const junkDrawer = new JunkDrawer({ root: drawerRoot })
+const staticDir = path.join(__dirname, 'static')
+const staticPath = '/static/'
+
+const junkDrawer = JunkDrawer({ root: drawerRoot })
+const ecstatic = Ecstatic({
+  baseDir: staticPath,
+  root: staticDir,
+})
+
+Handlebars.registerHelper('human', function(num) {
+  return humanize.filesize(num)
+})
+
 
 const methodEndpoints = {
   'GET': function (req, res) {
     if (isIndex(req))
       return showIndex(res)
+
+    if (isStatic(req))
+      return ecstatic(req, res)
 
     const file = getFilePath(req)
 
@@ -76,16 +95,31 @@ function isIndex(req) {
   return parts.pathname.trim() === '/'
 }
 
+function isStatic(req) {
+  const parts = url.parse(req.url)
+  const fullpath = parts.pathname
+  return fullpath.indexOf(path.join(staticPath, '/')) === 0
+}
+
 function showIndex(res) {
-  junkDrawer.getFileList(function (error, files) {
+  const templateFile = path.join(__dirname, 'index.html')
+  fs.readFile(templateFile, function (error, contents) {
     if (error) {
       console.dir(error)
       return fileNotFound(res)
     }
 
-    res.writeHead(200, {'content-type': 'application/json'})
-    res.write(JSON.stringify(files))
-    res.end()
+    const tmpl = Handlebars.compile(contents.toString('utf8'))
+    junkDrawer.getFileList(function (error, files) {
+      if (error) {
+        console.dir(error)
+        return fileNotFound(res)
+      }
+
+      res.writeHead(200, {'content-type': 'text/html'})
+      res.write(tmpl({ files: files }))
+      res.end()
+    })
   })
 }
 
