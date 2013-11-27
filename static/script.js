@@ -10,46 +10,46 @@ var focused = -2
 document.body.addEventListener('keydown', keystrokes, true)
 
 function keystrokes(event) {
-  const up = 38
-  const down = 40
+  // const up = 38
+  // const down = 40
 
-  var visible = [].slice.call(document.querySelectorAll('li:not(.hidden)'))
+  // var visible = [].slice.call(document.querySelectorAll('li:not(.hidden)'))
 
-  if (!visible.length)
-    return filter.focus()
+  // if (!visible.length)
+  //   return filter.focus()
 
-  if (event.keyCode == down) {
-    focused ++
+  // if (event.keyCode == down) {
+  //   focused ++
 
-    if (focused == -1)
-      return filter.focus()
+  //   if (focused == -1)
+  //     return filter.focus()
 
-    if (focused == visible.length)
-      focused = visible.length - 1
-    visible[focused].querySelector('a').focus()
-    return false
-  }
+  //   if (focused == visible.length)
+  //     focused = visible.length - 1
+  //   visible[focused].querySelector('a').focus()
+  //   return false
+  // }
 
-  else if (event.keyCode == up) {
-    if (focused == -1)
-      return
+  // else if (event.keyCode == up) {
+  //   if (focused == -1)
+  //     return
 
-    focused --
+  //   focused --
 
-    if (focused < 0) {
-      list.querySelector('a:focus').blur()
-      filter.focus()
-      focused = -1
-      return
-    }
-    visible[focused].querySelector('a').focus()
-    return false
-  }
+  //   if (focused < 0) {
+  //     list.querySelector('a:focus').blur()
+  //     filter.focus()
+  //     focused = -1
+  //     return
+  //   }
+  //   visible[focused].querySelector('a').focus()
+  //   return false
+  // }
 
-  else {
-    filter.focus()
-    return true
-  }
+  // else {
+  //   filter.focus()
+  //   return true
+  // }
 }
 
 

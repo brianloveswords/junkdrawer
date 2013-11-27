@@ -17,9 +17,9 @@ a {
 a:hover {
   border-bottom: 1px dotted #464;
 }
-a:focus {
+a:focus, a:focus span {
   transition: all 0.5s;
-  color: #37a;
+  color: #37a; /* yolo */
 }
 ul {
   list-style: none;
