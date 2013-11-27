@@ -11,15 +11,19 @@ document.body.addEventListener('keydown', function (event) {
   const up = 38
   const down = 40
 
+  var visible = [].slice.call(document.querySelectorAll('li:not(.hidden)'))
+  if (!visible.length)
+    return filter.focus()
+
   if (event.keyCode == down) {
     focused ++
 
     if (focused == -1)
       return filter.focus()
 
-    if (focused == entries.length)
-      focused = entries.length - 1
-    entries[focused].querySelector('a').focus()
+    if (focused == visible.length)
+      focused = visible.length - 1
+    visible[focused].querySelector('a').focus()
   }
 
   if (event.keyCode == up) {
@@ -34,7 +38,7 @@ document.body.addEventListener('keydown', function (event) {
       focused = -1
       return
     }
-    entries[focused].querySelector('a').focus()
+    visible[focused].querySelector('a').focus()
   }
 })
 
