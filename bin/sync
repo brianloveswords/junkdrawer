@@ -1,0 +1,2 @@
+#!/bin/bash
+git push && ssh bumblebee 'cd apps/junkdrawer && git pull && npm install'

@@ -62,3 +62,12 @@ li {
 .size:after {
   content: '}'
 }
+.shown {
+  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  opacity: 1.0;
+  height: 1.3em;
+}
+.hidden {
+  opacity: 0;
+  height: 0;
+}

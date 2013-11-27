@@ -2,18 +2,19 @@
 <html>
   <head>
     <title>just some junk</title>
+    <meta charset="utf8">
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     <link rel="stylesheet" type="text/css" href="/static/fira.css">
   </head>
   <body>
     <h1>Whatever</h1>
     <div class="search">
-      <input type="search" placeholder="filter">
+      <input type="search" placeholder="filter" id="filter">
     </div>
 
     <ul>
       {{#files}}
-      <li data-file="{{file}}">
+      <li data-file="{{file}}" class="shown">
         <a href="{{file}}">{{file}}</a>
         <span class="size">{{human stats.size}}</span>
       </li>
