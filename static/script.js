@@ -14,6 +14,7 @@ function keystrokes(event) {
   const down = 40
 
   var visible = [].slice.call(document.querySelectorAll('li:not(.hidden)'))
+
   if (!visible.length)
     return filter.focus()
 
@@ -69,18 +70,36 @@ function search(event) {
 
   oldTerm = term
 
-  console.log('doing')
+
   const pattern = new RegExp('.*?(' + term + ').*?', 'i')
   entries.forEach(function (entry) {
     const link = entry.querySelector('a')
     const filename = entry.dataset.file
     const match = pattern.exec(filename)
     if (pattern.test(filename)) {
-      link.innerHTML =
-        filename.replace(match[1], '<span>'+match[1]+'</span>')
-
-      link.querySelector('span').classList.add('highlight')
       entry.classList.remove('hidden')
+
+      const highlight = link.querySelector('span')
+
+      function addHighlight() {
+        clearTimeout(entry.timerAlpha)
+        link.innerHTML =
+          filename.replace(match[1], '<span>'+match[1]+'</span>')
+        entry.timerAlpha = setTimeout(function () {
+          link.querySelector('span').classList.add('highlight')
+        }, 50)
+      }
+
+      if (highlight) {
+        clearTimeout(entry.timerBeta)
+        highlight.classList.remove('highlight')
+        entry.timerBeta = setTimeout(addHighlight, 400)
+      }
+
+      else
+        addHighlight()
+
+
     }
     else {
       link.innerHTML = filename
@@ -100,4 +119,4 @@ function showAll(entries) {
   })
 }
 
-search()
+search({})

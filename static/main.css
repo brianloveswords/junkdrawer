@@ -72,12 +72,12 @@ li {
   height: 0;
 }
 a span {
-  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 400ms;
   color: #5af;
 }
 a span.highlight {
-  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
-  border-bottom: 1px dotted #f93;
+  transition: all 800ms;
+  color: #444;
 }
 small {
   color: #ddd;
