@@ -1,25 +1,2 @@
 <!doctype html "junkdrawer">
-<html>
-  <head>
-    <title>just some junk</title>
-    <meta charset="utf8">
-    <link rel="stylesheet" type="text/css" href="/static/main.css">
-    <link rel="stylesheet" type="text/css" href="/static/fira.css">
-  </head>
-  <body>
-    <h1>/x/</h1>
-    <div class="search">
-      <input type="search" placeholder="filter" id="filter">
-    </div>
-    <hr style="clear: both">
-    <ul>
-      {{#files}}
-      <li data-file="{{file}}" class="shown">
-        <a href="{{file}}">{{file}}</a>
-        <span class="size">{{human stats.size}}</span>
-      </li>
-      {{/files}}
-    </ul>
-    <script src="/static/script.js"></script>
-  </body>
-</html>
+<title>just some junk</title><meta charset="utf8"><link rel="stylesheet" type="text/css" href="/static/main.css"><link rel="stylesheet" type="text/css" href="/static/fira.css"></head><body><h1>/x/</h1><div class="search"><input type="search" placeholder="filter" id="filter"></div><hr style="clear: both"><ul>{{#files}}<li data-file="{{file}}" class="shown"><a href="{{file}}">{{file}}</a><span class="size">{{human stats.size}}</span></li>{{/files}}</ul><script src="/static/script.js"></script>

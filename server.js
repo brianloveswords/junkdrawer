@@ -27,6 +27,24 @@ Handlebars.registerHelper('human', function(num) {
 
 
 const methodEndpoints = {
+  'HEAD': function (req, res) {
+    const file = getFilePath(req)
+
+    var size = 0
+    junkDrawer.createReadStream(file)
+      .on('error', function (error) {
+        console.dir(error)
+        return fileNotFound(res)
+      })
+      .on('data', function (data) { size += data.length })
+      .on('end', function () {
+        res.writeHead(200, {
+          'x-human-size': humanize.filesize(size)
+        })
+        res.end()
+      })
+  },
+
   'GET': function (req, res) {
     if (isIndex(req))
       return showIndex(res)
@@ -131,7 +149,7 @@ function getFilePath(req) {
 }
 
 function acceptableMethod(method) {
-  var METHODS = ['GET', 'POST', 'DELETE']
+  var METHODS = ['GET', 'POST', 'DELETE', 'HEAD']
   return METHODS.indexOf(method) !== -1
 }
 
