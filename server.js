@@ -32,6 +32,10 @@ const methodEndpoints = {
     const file = getFilePath(req)
 
     var size = 0
+
+    const type = mime.lookup(file)
+    res.setHeader('content-type', type)
+
     junkDrawer.createReadStream(file)
       .on('error', function (error) {
         console.dir(error)
@@ -111,7 +115,7 @@ http.createServer(function (req, res) {
 
   return methodEndpoints[method](req, res)
 
-}).listen(process.env.SOCKET || '/tmp/junk.sock')
+}).listen(process.env.SOCKET || process.env.PORT || '/tmp/junk.sock')
 
 function isIndex(req) {
   const parts = url.parse(req.url)
