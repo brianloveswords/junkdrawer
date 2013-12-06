@@ -4,6 +4,7 @@ const http = require('http')
 const fs = require('fs')
 const path = require('path')
 const url = require('url')
+const mime = require('mime')
 const humanize = require('humanize')
 const JunkDrawer = require('./')
 const Handlebars = require('handlebars')
@@ -53,7 +54,9 @@ const methodEndpoints = {
       return ecstatic(req, res)
 
     const file = getFilePath(req)
+    const type = mime.lookup(file)
 
+    res.setHeader('content-type', type)
     junkDrawer.createReadStream(file)
       .on('error', function (error) {
         console.dir(error)

@@ -15,7 +15,8 @@
     "humanize": "0.0.9",
     "supervisor": "~0.5.6",
     "async": "~0.2.9",
-    "handlebars": "~1.1.2"
+    "handlebars": "~1.1.2",
+    "mime": "~1.2.11"
   },
   "devDependencies": {
     "tap": "~0.4.6"
