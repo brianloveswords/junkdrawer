@@ -61,6 +61,7 @@ const methodEndpoints = {
     const type = mime.lookup(file)
 
     res.setHeader('content-type', type)
+    res.setHeader('access-control-allow-origin', '*')
     junkDrawer.createReadStream(file)
       .on('error', function (error) {
         console.dir(error)
